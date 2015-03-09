@@ -46,12 +46,15 @@ int AirQuality2::init(int Pin)
   
   // define a set of rules to exclude bad initialization
   // like too high or too low sensor values
-  if(iReferenceValue > BAD_AIR_THRESHOLD || iReferenceValue < 10 || 
-      abs(_tmpVal[0] - iReferenceValue) > 10 ||
-	  abs(_tmpVal[1] - iReferenceValue) > 10 ||
-	  abs(_tmpVal[2] - iReferenceValue) > 10)
+  if(iReferenceValue > BAD_AIR_THRESHOLD || iReferenceValue < 10)
   {
-    return -1;
+	  return -1;
+  }
+  if( abs(_tmpVal[0] - iReferenceValue) > 15 ||
+	  abs(_tmpVal[1] - iReferenceValue) > 15 ||
+	  abs(_tmpVal[2] - iReferenceValue) > 15)
+  {
+    return -2;
   }
   
   isInitialized = true;
